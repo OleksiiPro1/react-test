@@ -1,23 +1,41 @@
 import React, {useState} from "react";
 const Counter = () => {
-    const [counter, setCounter] = useState({count: 0});
-    function increment(dop) {
+    const [counter, setCounter] = useState([]);
+    const [inputValue, setinputValue] = useState('');
+console.log(counter);
+function handleChange(e) {
+    e.preventDefault()
+    setinputValue(e.target.value)
+
+}
+
+    function increment() {
         setCounter((prev) => {
-            return {count: prev.count + 1 + dop};
+            return [...counter,true]
         });
     }
     function decrement() {
         setCounter((prev) => {
-            return {count: prev.count - 1};
+            console.log(prev);
+            return [...counter,false]
         });
     }
     return (
         <div>
-            <p>{counter}</p>
-            <button onClick={()=>increment(4)}>+1</button>
-            <button onClick={decrement}>-1</button>
+            <input onChange={handleChange} value={inputValue} type="text" />
+            <button onClick={()=>{
+                setCounter((prev) => {
+                    return [...prev,inputValue]
+                });
+                setinputValue('')
+            }}>add</button>
+            <p>{counter.dop}</p>
+            <button onClick={increment}>True</button>
+            <button onClick={decrement}>False</button>
         </div>
     );
 }
 
 export default Counter;
+
+
