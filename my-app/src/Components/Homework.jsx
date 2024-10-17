@@ -1,18 +1,30 @@
 import React, {useState} from 'react';
 
 const Homework = () => {
-    const [good, setGood] = useState(0);
-    const [neutral, setNeutral] = useState(0);
-    const [bad, setBad] = useState(0);
-    function incrementGood() {
-        setGood(good + 1);
-    }
-    function incrementNeutral() {
-        setNeutral(neutral + 1);
-    }
-    function incrementBad() {
-        setBad(bad + 1);
-    }
+const [feedBack, setFeedBack] = useState({
+    bad:0,
+    neutral:0,
+    good:0
+});
+
+
+const obj = {
+    a:1,
+    b:2
+}
+
+console.log(obj['b']);
+
+function handleFeedBack(e) {
+    console.log(e.target.dataset.type);
+    setFeedBack((prev)=>{
+return {
+    ...prev,
+    [e.target.dataset.type]: prev[e.target.dataset.type]+1
+}
+ })
+}
+   console.log(feedBack);
     return (
         
         <div>
@@ -24,16 +36,16 @@ const Homework = () => {
             <hr />
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 <div className="container">
-                    <p>{good}</p>
-                    <button onClick={incrementGood}>good</button>
+                    <p>{feedBack.good}</p>
+                    <button data-type='good' onClick={handleFeedBack}>good</button>
                 </div>
                 <div className="container">
-                    <p>{neutral}</p>
-                    <button onClick={incrementNeutral}>neutral</button>
+                    <p>{feedBack.neutral}</p>
+                    <button data-type='neutral' onClick={handleFeedBack}>neutral</button>
                 </div>
                 <div className="container">
-                    <p>{bad}</p>
-                    <button onClick={incrementBad}>bad</button>
+                    <p>{feedBack.bad}</p>
+                    <button data-type='bad' onClick={handleFeedBack}>bad</button>
                 </div>  
             </div>
         </div>

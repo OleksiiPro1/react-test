@@ -12,7 +12,7 @@ function handleChange(e) {
 
     function increment() {
         setCounter((prev) => {
-            return [...counter,true]
+            return [...prev,true]
         });
     }
     function decrement() {
