@@ -1,24 +1,35 @@
 import React, {useState} from 'react';
 
 const Homework = () => {
-const [feedBack, setFeedBack] = useState({
+const [feedBack, setFeedBack] = useState(()=>{
+    const localFeedback = JSON.parse(localStorage.getItem('feedback'))
+
+    return localFeedback || {
     bad:0,
     neutral:0,
     good:0
-});
+}});
 
 function handleFeedBack(e) {
     console.log(e.target.dataset.type);
+    // localStorage.removeItem
+
     setFeedBack((prev)=>{
+        localStorage.setItem('feedback',JSON.stringify( {
+            ...prev,
+            [e.target.dataset.type]: prev[e.target.dataset.type]+1
+        }))
 return {
     ...prev,
     [e.target.dataset.type]: prev[e.target.dataset.type]+1
 }
  })
 }
+
+
    const totalFeedback = feedBack.bad + feedBack.neutral + feedBack.good;
    
-   const positiveFeedback = feedBack.good / totalFeedback * 100;
+   const positiveFeedback = (feedBack.good / totalFeedback * 100).toFixed(1)+"%";
     return (
         
         <div>
