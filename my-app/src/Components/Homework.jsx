@@ -7,14 +7,6 @@ const [feedBack, setFeedBack] = useState({
     good:0
 });
 
-
-const obj = {
-    a:1,
-    b:2
-}
-
-console.log(obj['b']);
-
 function handleFeedBack(e) {
     console.log(e.target.dataset.type);
     setFeedBack((prev)=>{
@@ -24,7 +16,9 @@ return {
 }
  })
 }
-   console.log(feedBack);
+   const totalFeedback = feedBack.bad + feedBack.neutral + feedBack.good;
+   
+   const positiveFeedback = feedBack.good / totalFeedback * 100;
     return (
         
         <div>
@@ -46,8 +40,14 @@ return {
                 <div className="container">
                     <p>{feedBack.bad}</p>
                     <button data-type='bad' onClick={handleFeedBack}>bad</button>
-                </div>  
+                </div>                 
             </div>
+                <div>
+                    {totalFeedback ? <><p>Total feedback: {totalFeedback}</p><p>Total positive feedback: {positiveFeedback}</p></> : <p>No feedback yet</p> }
+                    
+                   
+
+                </div> 
         </div>
     );
 }
