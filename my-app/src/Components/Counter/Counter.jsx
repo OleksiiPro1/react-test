@@ -2,6 +2,7 @@ import React, {useState} from "react";
 const Counter = () => {
     const [counter, setCounter] = useState([]);
     const [inputValue, setinputValue] = useState('');
+    
 console.log(counter);
 function handleChange(e) {
     e.preventDefault()
