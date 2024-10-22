@@ -77,7 +77,7 @@ function resetAll() {
 
                 </div> 
                 <div>
-                    <button onClick={resetAll}>Reset</button>
+                {totalFeedback ? <button onClick={resetAll}>Reset</button> : ''}
                 </div>
         </div>
     );
