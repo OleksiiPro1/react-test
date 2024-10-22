@@ -11,17 +11,18 @@ const [feedBack, setFeedBack] = useState(()=>{
 }});
 
 function handleFeedBack(e) {
+    const typeFeedback = e.target.dataset.type;
     console.log(e.target.dataset.type);
     // localStorage.removeItem
 
     setFeedBack((prev)=>{
         localStorage.setItem('feedback',JSON.stringify( {
             ...prev,
-            [e.target.dataset.type]: prev[e.target.dataset.type]+1
+            [typeFeedback]: prev[typeFeedback]+1
         }))
 return {
     ...prev,
-    [e.target.dataset.type]: prev[e.target.dataset.type]+1
+    [typeFeedback]: prev[typeFeedback]+1
 }
  })
 }
