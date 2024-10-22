@@ -26,6 +26,23 @@ return {
  })
 }
 
+function resetAll() {
+    setFeedBack((prev)=>{
+        localStorage.setItem('feedback',JSON.stringify( {
+            ...prev,
+            bad:0,
+            neutral:0,
+            good:0
+        }))
+        return {
+            ...prev,
+            bad:0,
+            neutral:0,
+            good:0
+        }
+         })
+}
+
 
    const totalFeedback = feedBack.bad + feedBack.neutral + feedBack.good;
    
@@ -59,6 +76,9 @@ return {
                    
 
                 </div> 
+                <div>
+                    <button onClick={resetAll}>Reset</button>
+                </div>
         </div>
     );
 }
