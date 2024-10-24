@@ -14,6 +14,7 @@ const [productsList, setProductsList] = useState([]);
             console.error('Error fetching products:', error);
         });
 }, [offset]); 
+// const filteredProductlist = 
     return (
         <div>
             <div>
