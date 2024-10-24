@@ -14,7 +14,11 @@ const [productsList, setProductsList] = useState([]);
             console.error('Error fetching products:', error);
         });
 }, [offset]); 
-// const filteredProductlist = 
+
+// const filteredProductlist = productsList.filter((product)=>{
+    
+//     return productsList.indexOf(product) !== 
+// })
     return (
         <div>
             <div>

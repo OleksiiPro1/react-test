@@ -10,13 +10,14 @@ function App() {
   const [state, setstate] = useState(true);
   return (
     <div className="App">
-      <Store />
+      {/* <Store /> */}
       {/* <Counter />
       <Homework /> */}
-      {/* {state && <PokemonApi/>}
-      <button onClick={()=>{
+   <PokemonApi/>
+      {/* <button onClick={()=>{
 setstate(false)
       }}>click delete</button> */}
+
     </div>
   );
 }
