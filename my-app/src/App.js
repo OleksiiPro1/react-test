@@ -5,6 +5,7 @@ import Counter from './Components/Counter/Counter';
 import Homework from './Components/Homework';
 import PokemonApi from './Components/PokemonApi/PokemonApi';
 import Store from './Components/Store/Store';
+import Contacts from './Components/Contacts/Contacts';
 
 function App() {
   const [state, setstate] = useState(true);
@@ -13,7 +14,8 @@ function App() {
       {/* <Store /> */}
       {/* <Counter />
       <Homework /> */}
-   <PokemonApi/>
+   {/* <PokemonApi/> */}
+   <Contacts />
       {/* <button onClick={()=>{
 setstate(false)
       }}>click delete</button> */}
