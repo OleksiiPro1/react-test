@@ -55,14 +55,16 @@ const Contacts = () => {
             return;
         }
 
-        setContacts((prev) => {
-            prev.map((contact) => {
-                contact.id === 1 ? { ...contact, name: modalInput, phone: modalPhoneNumber, email: modalEmail } : contact
-            })
-        });
-        
+       
+        const newContactList = contacts.map((contact) =>{
+            if (contact.id === currentContactChange) {
+    return [{id: currentContactChange, name: modalInput, phone: modalPhoneNumber, email: modalEmail}]
+            } else {
+                return contact
+            }
+        })
          
-
+        setContacts(newContactList);
         setModalInput('');
         setModalPhoneNumber('');
         setModalEmail('');
@@ -70,13 +72,13 @@ const Contacts = () => {
     }
 
     function modalHandleInput(e) {
-        setInputValue(e.target.value);
+        setModalInput(e.target.value);
     }
     function modalHandleInputPhoneNumber(e) {
-        setPhoneNumber(e.target.value);
+        setModalPhoneNumber(e.target.value);
     }
     function modalHandleInputEmail(e) {
-        setEmail(e.target.value);
+        setModalEmail(e.target.value);
     }
 
     function onClose() {
@@ -95,11 +97,11 @@ const Contacts = () => {
             <form action="submit" onSubmit={handleSubmit}>
             <br />
                 <label>Name </label><br />
-                <input onChange={modalHandleInput} value={inputValue} type="text" /><br /><br />
+                <input onChange={handleInput} value={inputValue} type="text" /><br /><br />
                 <label>Phone number </label><br />
-                <input onChange={modalHandleInputPhoneNumber} value={phoneNumber} type="text" /><br /><br />
+                <input onChange={handleInputPhoneNumber} value={phoneNumber} type="text" /><br /><br />
                 <label>Email </label><br />
-                <input onChange={modalHandleInputEmail} value={email} type="text" /><br /><br />
+                <input onChange={handleInputEmail} value={email} type="text" /><br /><br />
                 <button type='submit' onSubmit={handleSubmit}>Add a contact</button>
             </form>
             <ul>
@@ -113,9 +115,9 @@ const Contacts = () => {
             {isOpenModal && <div className={s.overlay}>
                 <div className={s.modal}>
                     <form action="submit" onSubmit={modalHandlSubmit}>
-                        <input type="text" onChange={handleInput} />
-                        <input type="text" onChange={handleInputPhoneNumber} />
-                        <input type="text" onChange={handleInputEmail} />
+                        <input type="text" value={modalInput} onChange={modalHandleInput} />
+                        <input type="text" value={modalPhoneNumber} onChange={modalHandleInputPhoneNumber} />
+                        <input type="text" value={modalEmail} onChange={modalHandleInputEmail} />
                         <button type='submit' onSubmit={modalHandlSubmit}>Edit</button>
                         
                         <img onClick={() => {onClose()}} style={{width: '20px'}} src={images.closeImg} alt="close" />
