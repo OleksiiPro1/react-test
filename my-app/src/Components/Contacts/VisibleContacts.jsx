@@ -1,6 +1,6 @@
 import React from 'react';
 import images from '../../Assets/index';
-const VisibleContacts = ({setContacts, contacts,setIsOpenModal,setCurrentContactChange, filteredArray}) => {
+const VisibleContacts = ({setContacts, contacts,setIsOpenModal,setCurrentContactChange, abs}) => {
     function onDelete(id) {
         console.log(id);
         const filteredArray = contacts.filter((contact) => {
@@ -10,7 +10,7 @@ const VisibleContacts = ({setContacts, contacts,setIsOpenModal,setCurrentContact
     }
     return (
         <ul>
-        {filteredArray.map((contact) =>{
+        {abs.map((contact) =>{
             return (<li key={contact.id}><p>{contact.name}: {contact.phone} / {contact.email}</p><img onClick={() => {
                 setIsOpenModal(true);
                 setCurrentContactChange(contact.id);
