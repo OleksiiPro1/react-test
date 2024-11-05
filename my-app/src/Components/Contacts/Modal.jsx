@@ -8,6 +8,7 @@ const Modal = ({setIsOpenModal, isOpenModal, contacts, currentContactChange, set
     const [modalPhoneNumber, setModalPhoneNumber] = useState('');
     const [modalEmail, setModalEmail] = useState('');
 
+    
     function modalHandleInput(e) {
         setModalInput(e.target.value);
     }

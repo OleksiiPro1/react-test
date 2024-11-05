@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import VisibleContacts from './VisibleContacts';
 import Form from './Form';
 import Modal from './Modal';
+import Filter from './Filter';
 
 const Contacts = () => {
     
@@ -15,29 +16,25 @@ const Contacts = () => {
     return localSave || [];
 });
 
+
+
     useEffect(() => {
         localStorage.setItem('contacts', JSON.stringify(contacts));
     }, [contacts]);
 
+    const filteredArray = contacts.filter((contact) => {
+        console.log(contact);
+        
+        return contact.name.toLowerCase().includes(filter.toLowerCase()) || contact.email.toLowerCase().includes(filter.toLowerCase()) || contact.phone.toLowerCase().includes(filter.toLowerCase())
+        
+        
+    });
     
-
-
-    
-    
-
-    
-
-    function onDelete(id) {
-        console.log(id);
-        const filteredArray = contacts.filter((contact) => {
-            return id !== contact.id;
-        });
-        setContacts(filteredArray);
-    }
     return (
         <div>
-            <Form />
-            <VisibleContacts contacts={contacts} setIsOpenModal={setIsOpenModal} setCurrentContactChange={setCurrentContactChange} onDelete={onDelete}/>
+            <Form setContacts={setContacts}/>
+            <Filter filteredArray={filteredArray}/>
+            <VisibleContacts filteredArray={filteredArray} setContacts={setContacts} contacts={contacts} setIsOpenModal={setIsOpenModal} setCurrentContactChange={setCurrentContactChange} />
             <Modal contacts={contacts} setContacts={setContacts} setIsOpenModal={setIsOpenModal} isOpenModal={isOpenModal} currentContactChange={currentContactChange} />
         </div>
     );
