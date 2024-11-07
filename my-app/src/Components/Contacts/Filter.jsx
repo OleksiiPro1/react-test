@@ -14,7 +14,7 @@ useEffect(() => {
     });
 
     setFilteredContacts(filteredArray)
-}, [filter]);
+}, [filter,contacts]);
 
     return (
         <div>
