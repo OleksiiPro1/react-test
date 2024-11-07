@@ -11,11 +11,11 @@ function App() {
   const [state, setstate] = useState(true);
   return (
     <div className="App">
-      {/* <Store /> */}
+      <Store />
       {/* <Counter />
       <Homework /> */}
    {/* <PokemonApi/> */}
-   <Contacts />
+   {/* <Contacts /> */}
       {/* <button onClick={()=>{
 setstate(false)
       }}>click delete</button> */}
