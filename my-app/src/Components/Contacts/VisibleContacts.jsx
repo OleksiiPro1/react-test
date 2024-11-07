@@ -8,6 +8,8 @@ const VisibleContacts = ({setContacts, contacts,setIsOpenModal,setCurrentContact
         });
         setContacts(filteredArray);
     }
+    console.log(abs);
+    
     return (
         <ul>
         {abs.map((contact) =>{
