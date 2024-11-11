@@ -2,8 +2,60 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 axios.defaults.baseURL = 'https://api.escuelajs.co/api/v1/products';
 const Store = () => {
+    const [inputValue, setInputValue] = useState('');
+    function handleInput(e) {
+        setInputValue(e.target.value);
+    }
+    const [prise, setPrise] = useState();
+    function handleInputPrise(e) {
+        setPrise(e.target.value);
+    }
+    const [description, setDescription] = useState();
+    function handleInputDescription(e) {
+        setDescription(e.target.value);
+    }
+        const [productId, setproductId] = useState();
+        function handleInputproductId(e) {
+            setproductId(e.target.value);
+        }
+        const [productNmame, setproductName] = useState();    
+        function handleInputproductName(e) {
+            setproductName(e.target.value);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            if(!inputValue || !prise || !description || !productId || !productNmame ) {
+                alert('All fields must be filled out');
+                return;
+            }
+
+            setInputValue('');
+            setPrise('');
+            setDescription('');
+            setproductId('');
+            setproductName('');
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const [offset, setOffset] = useState(0);
-const [productsList, setProductsList] = useState([]);
+    const [productsList, setProductsList] = useState([]);
 
     useEffect(() => {
         // fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=1`)
@@ -58,6 +110,28 @@ async function delProduct() {
 // })
     return (
         <div>
+            <form action="submit">
+                <label>Title</label> <br />
+                <input onChange={handleInput} value={inputValue} type="text" /><br />
+                <label>Prise</label><br />
+                <input onChange={handleInputPrise} value={prise} type="text" /><br />
+                <label>Description</label><br />
+                <input onChange={handleInputDescription} value={description} type="text" /><br />
+                <label>Product category id</label><br />
+                <input onChange={handleInputproductId} value={productId} type="text" /><br />
+                <label>Product category name</label><br />
+                <input onChange={handleInputproductName} value={productNmame} type="text" /><br /><br />
+                <button type='submit' onSubmit={handleSubmit}>Add a product</button>
+                <br /><br />
+            </form>
+
+        <hr />
+
+
+
+
+
+
             <button onClick={addProduct}>Add product</button>
             <button onClick={delProduct}>Delete</button>
             <div>
