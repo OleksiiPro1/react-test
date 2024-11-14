@@ -6,41 +6,51 @@ const Store = () => {
     function handleInput(e) {
         setInputValue(e.target.value);
     }
-    const [prise, setPrise] = useState();
+    const [prise, setPrise] = useState(0);
     function handleInputPrise(e) {
         setPrise(e.target.value);
     }
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState('');
     function handleInputDescription(e) {
         setDescription(e.target.value);
     }
-        const [productId, setproductId] = useState();
+        const [productId, setproductId] = useState('');
         function handleInputproductId(e) {
             setproductId(e.target.value);
-        }
-        const [productNmame, setproductName] = useState();    
-        function handleInputproductName(e) {
-            setproductName(e.target.value);
         }
 
         function handleSubmit(e) {
             e.preventDefault();
-            if(!inputValue || !prise || !description || !productId || !productNmame ) {
+            if(!inputValue || !prise || !description || !productId ) {
                 alert('All fields must be filled out');
                 return;
             }
-
+            formProduct();
             setInputValue('');
-            setPrise('');
+            setPrise(0);
             setDescription('');
             setproductId('');
-            setproductName('');
-
-
 
         }
 
-
+        function formProduct() {
+            axios.post('', 
+                {
+                    title: inputValue,
+                    price: prise,
+                    description: description,
+                    categoryId: productId,
+                    images: ["https://placeimg.com/640/480/any"]
+                  },
+                  {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': '*/*'
+                    }
+                  }
+            ).then((res)=>{console.log(res);
+            })
+        }
 
 
 
@@ -110,7 +120,7 @@ async function delProduct() {
 // })
     return (
         <div>
-            <form action="submit">
+            <form onSubmit={handleSubmit}>
                 <label>Title</label> <br />
                 <input onChange={handleInput} value={inputValue} type="text" /><br />
                 <label>Prise</label><br />
@@ -118,10 +128,8 @@ async function delProduct() {
                 <label>Description</label><br />
                 <input onChange={handleInputDescription} value={description} type="text" /><br />
                 <label>Product category id</label><br />
-                <input onChange={handleInputproductId} value={productId} type="text" /><br />
-                <label>Product category name</label><br />
-                <input onChange={handleInputproductName} value={productNmame} type="text" /><br /><br />
-                <button type='submit' onSubmit={handleSubmit}>Add a product</button>
+                <input onChange={handleInputproductId} value={productId} type="text" /><br /><br />
+                <button type='submit' onSubmit={handleSubmit} onClick={formProduct}>Add a product</button>
                 <br /><br />
             </form>
 
