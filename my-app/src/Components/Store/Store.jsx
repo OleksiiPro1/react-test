@@ -3,7 +3,6 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://api.escuelajs.co/api/v1/products'
 const Store = () => {
 const [delProductId, setDelProductId] = useState(0);    
-const [offset, setOffset] = useState(0)
 const [productsList, setProductsList] = useState([])
   const [inputValue, setInputValue] = useState('')
   function handleInput(e) {
@@ -50,6 +49,34 @@ const [productsList, setProductsList] = useState([])
     setproductId('')
   }
 
+  function forceDeleteProduct(id) {
+    axios
+    .delete(
+      `/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: '*/*',
+        },
+      },
+    )
+    .then((res) => {
+      console.log(res)
+    }).catch((error) => {
+        console.error('Error fetching products:', error)
+      })
+      
+  }
+
+  useEffect(() => {
+     productsList.map((product)=>{
+         if(product.title.toLowerCase() !== "maks"){
+forceDeleteProduct(product.id)
+         }
+     }) 
+
+  }, [productsList]);
+
   function formProduct() {
     axios
       .post(
@@ -75,26 +102,7 @@ const [productsList, setProductsList] = useState([])
 
 
 
-  useEffect(() => {
-    // fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=1`)
-    // .then((res) => res.json())
-    // .then((data) => {
-    //     setProductsList((prod) => [...prod, ...data]);
-    // })
-    // .catch((error) => {
-    //     console.error('Error fetching products:', error);
-    // });
-    axios
-      .get('')
-      .then((res) => {
-        // console.log(res);
 
-        setProductsList((prod) => [...prod, ...res.data])
-      })
-      .catch((error) => {
-        console.error('Error fetching products:', error)
-      })
-  }, [offset])
 
   function addProduct() {
     axios
@@ -177,10 +185,10 @@ const [productsList, setProductsList] = useState([])
 
       <button onClick={addProduct}>Add product</button>
       <button onClick={delProduct}>Delete</button>
-      <div>
+      <ul>
         {productsList.reverse().map((product) => {
           return (
-            <div>
+            <li>
               <h1 key={product.id}>
                 <b>Title: </b>
                 {product.title}
@@ -203,18 +211,12 @@ const [productsList, setProductsList] = useState([])
               </p>
 
               <img src={product.category.image} width="200" />
-            </div>
+            </li>
           )
         })}
 
-        <button
-          onClick={() => {
-            setOffset(offset + 1)
-          }}
-        >
-          next page
-        </button>
-      </div>
+       
+      </ul>
     </div>
   )
 }
