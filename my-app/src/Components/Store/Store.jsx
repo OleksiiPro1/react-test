@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 axios.defaults.baseURL = 'https://api.escuelajs.co/api/v1/products'
 const Store = () => {
+const [delProductId, setDelProductId] = useState(0);    
+const [offset, setOffset] = useState(0)
+const [productsList, setProductsList] = useState([])
   const [inputValue, setInputValue] = useState('')
   function handleInput(e) {
     setInputValue(e.target.value)
@@ -18,7 +21,22 @@ const Store = () => {
   function handleInputproductId(e) {
     setproductId(e.target.value)
   }
-
+  function handleSubmitToDelete(e) {
+    e.preventDefault()
+    axios
+      .delete(
+        `/${delProductId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res)
+      })
+  }
   function handleSubmit(e) {
     e.preventDefault()
     if (!inputValue || !prise || !description || !productId) {
@@ -55,8 +73,7 @@ const Store = () => {
       })
   }
 
-  const [offset, setOffset] = useState(0)
-  const [productsList, setProductsList] = useState([])
+
 
   useEffect(() => {
     // fetch(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=1`)
@@ -114,8 +131,20 @@ const Store = () => {
 
   //     return productsList.indexOf(product) !==
   // })
+
+    function handleDelProductId(e) {
+        setDelProductId(e.target.value)
+    }
+
   return (
     <div>
+        <form onSubmit={handleSubmitToDelete}>
+            <label>Delete Product</label>
+            <input type="number" value={delProductId} onChange={handleDelProductId} />
+            <br />
+            <button type={'submit'}>Delete Product</button>
+        </form>
+
       <form onSubmit={handleSubmit}>
         <label>Title</label> <br />
         <input onChange={handleInput} value={inputValue} type="text" />
