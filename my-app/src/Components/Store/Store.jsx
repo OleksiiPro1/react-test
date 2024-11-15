@@ -68,14 +68,14 @@ const [productsList, setProductsList] = useState([])
       
   }
 
-  useEffect(() => {
-     productsList.map((product)=>{
-         if(product.title.toLowerCase() !== "maks"){
-forceDeleteProduct(product.id)
-         }
-     }) 
+//   useEffect(() => {
+//      productsList.map((product)=>{
+//          if(product.title.toLowerCase() !== "maks"){
+// forceDeleteProduct(product.id)
+//          }
+//      }) 
 
-  }, [productsList]);
+//   }, [productsList]);
 
   function formProduct() {
     axios
